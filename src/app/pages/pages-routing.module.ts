@@ -5,7 +5,8 @@ import {HomeComponent} from "./home/home.component";
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'evento', loadChildren: './evento/evento.module#EventoModule'}
+  {path: 'evento', loadChildren: './evento/evento.module#EventoModule'},
+  {path: 'fornecedor', loadChildren: './fornecedor/fornecedor.module#FornecedorModule'}
 ];
 
 @NgModule({
