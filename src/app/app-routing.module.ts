@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ROUTE_CONFIG} from "./pages/@core/core.module";
+import {ROUTE_CONFIG} from "./@core/core.module";
 
 const routes: Routes = [
   {path: '', redirectTo: 'pages', pathMatch: 'full'},

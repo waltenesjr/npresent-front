@@ -11,13 +11,11 @@ export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule
   ],
   exports: [
     CommonModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule
   ]

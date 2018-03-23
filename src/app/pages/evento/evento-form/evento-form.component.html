@@ -1,34 +1,26 @@
 <nav class="navbar navbar-dark primary-color">
-  <a class="navbar-brand" href="#">NOSSO PRESENTE</a>
+  <a class="navbar-brand" href="#"><strong>NOSSO PRESENTE</strong></a>
   <form class="form-inline">
-    <button class="btn btn-outline-white btn-sm my-1" [routerLink]="['/pages/evento']">VOLTAR</button>
+    <button class="btn btn-outline-white btn-sm my-1" [routerLink]="['/pages/evento']"><strong>VOLTAR</strong></button>
   </form>
 </nav>
 <br>
 <div class="container">
-  <form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p class="h2 indigo-text" style="text-align: center;">Criar lista de presentes</p>
 
-    <div class="md-form">
-      <i class="fa fa-user prefix grey-text"></i>
-      <input type="text" id="nome" class="form-control" mdbActive>
-      <label for="nome">Nome </label>
-    </div>
+    <input type="text" id="nome" class="form-control" formControlName="nome">
+    <label for="nome"><strong>Nome</strong> </label>
 
-    <div class="md-form">
-      <i class="fa fa-envelope prefix grey-text"></i>
-      <input type="email" id="email" class="form-control" mdbActive>
-      <label for="email">Email </label>
-    </div>
+    <input type="categoria" id="categoria" class="form-control" formControlName="categoria">
+    <label for="categoria"><strong>Categoria</strong> </label><br>
 
-    <div class="md-form">
-      <i class="fa fa-shopping-cart prefix grey-text"></i>
-      <input type="text" id="loja" class="form-control" mdbActive>
-      <label for="loja">Loja </label>
-    </div>
+    <input type="file" id="avatar" (change)="onFileChange($event)">
+    <label for="avatar"><strong>Loja</strong> </label>
+    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
 
     <div class="text-center">
-      <button class="btn btn-indigo waves-light">Cria </button>
+      <button class="btn btn-indigo waves-light" type="submit"><strong>Confirmar </strong> </button>
     </div>
   </form>
 </div>

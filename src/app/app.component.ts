@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AnalyticsService} from "./pages/@core/util/analytics.service";
+import {AnalyticsService} from "./@core/util/analytics.service";
 
 @Component({
   selector: 'app-root',
