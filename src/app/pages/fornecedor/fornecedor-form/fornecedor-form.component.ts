@@ -1,6 +1,7 @@
 import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FornecedorService} from '../../../service/fornecedor.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-fornecedor-form',
@@ -14,7 +15,7 @@ export class FornecedorFormComponent {
   @ViewChild('fileInput') fileInput: ElementRef;
   private service: FornecedorService;
 
-  constructor(private injector: Injector) {
+  constructor(private injector: Injector, private toastr: ToastrService) {
     this.service = this.injector.get(FornecedorService);
     this.createForm();
   }
@@ -41,13 +42,19 @@ export class FornecedorFormComponent {
   }
 
   onSubmit() {
-    const formModel = this.form.value;
-    this.service.save(this.form.value).subscribe(() => { });
-    // In a real-world app you'd have a http request / service call here like
-    // this.http.post('apiUrl', formModel)
-    setTimeout(() => {
-      console.log(formModel);
-      alert('done!');
-    }, 1000);
+    if (this.validate()) {
+      this.service.save(this.form.value).subscribe(() => {
+        this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
+      });
+    }
+  }
+
+  validate(): boolean {
+    if (!this.form.value.nome) {
+      this.toastr.error('Campo nome é obrigatório', 'Erro');
+      return false;
+    } else {
+      return true;
+    }
   }
 }

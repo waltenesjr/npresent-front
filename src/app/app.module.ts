@@ -7,6 +7,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FileUploadModule} from 'ng2-file-upload';
 import {CoreModule} from './@core/core.module';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import {CoreModule} from './@core/core.module';
     AppRoutingModule,
     HttpClientModule,
     FileUploadModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
   ],
   schemas: [NO_ERRORS_SCHEMA],
