@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
+import {FornecedorService} from '../../../service/fornecedor.service';
+import {FornecedorModel} from '../../../model/fornecedor.model';
 
 @Component({
   selector: 'app-fornecedor-list',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FornecedorListComponent implements OnInit {
 
-  constructor() { }
+  list: FornecedorModel[];
+  private service: FornecedorService;
+
+  constructor(private injector: Injector) {
+    this.service = this.injector.get(FornecedorService);
+  }
 
   ngOnInit() {
+    this.service.getList().subscribe((res: FornecedorModel[]) => {
+      this.list = res;
+    });
   }
 
 }

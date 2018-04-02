@@ -6,17 +6,31 @@
 </nav>
 <br>
 <div class="container">
-  <form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p class="h2 indigo-text" style="text-align: center;">Criar fornecedor</p>
 
-    <input type="text" id="nome" class="form-control">
-    <label for="nome"><strong>Nome</strong> </label>
-
-    <input type="email" id="email" class="form-control">
-    <label for="email"><strong>Email</strong> </label>
-
-    <input type="text" id="loja" class="form-control">
-    <label for="loja"><strong>Loja</strong> </label>
+    <div class="row">
+      <div class="col-md">
+        <div class="row">
+          <input type="text" id="nome" class="form-control" formControlName="nome">
+          <label for="nome"><strong>Nome</strong> </label>
+        </div>
+        <div class="row">
+          <input type="text" id="email" class="form-control" formControlName="email">
+          <label for="email"><strong>Email</strong> </label><br>
+        </div>
+        <div class="row">
+          <input type="text" id="loja" class="form-control" formControlName="loja">
+          <label for="loja"><strong>Loja</strong> </label><br>
+        </div>
+      </div>
+      <div class="col-md text-center">
+        <br>
+        <label for="imagem" class="btn btn-indigo waves-light">Imagem da fornecedor</label>
+        <input type="file" id="imagem" (change)="onFileChange($event)" style="visibility:hidden;">
+        <img *ngIf="form.controls['imagem'].value" [src]="'data:image/jpg;base64,' + form.controls['imagem'].value" style="height:300px;width:300px" class="img-fluid rounded-circle z-depth-2"/>
+      </div>
+    </div>
 
     <div class="text-center">
       <button class="btn btn-indigo waves-light" type="submit"><strong>Confirmar </strong> </button>

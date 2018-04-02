@@ -13,34 +13,10 @@
     </div>
     <br>
     <div class="row">
-      <div class="col">
+      <div *ngFor="let forn of list" class="col-md-3">
         <div style="text-align: center">
-          <img src="http://mdbootstrap.com/img/Photos/Avatars/img%20(4).jpg" class="img-fluid rounded-circle z-depth-2">
-          <h3>Julia</h3>
-          <a class="btn btn-secondary">VISITAR</a>
-        </div>
-      </div>
-
-      <div class="col">
-        <div style="text-align: center">
-          <img src="http://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg" class="img-fluid rounded-circle z-depth-2">
-          <h3>Esther</h3>
-          <a class="btn btn-secondary">VISITAR</a>
-        </div>
-      </div>
-
-      <div class="col">
-        <div style="text-align: center">
-          <img src="http://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" class="img-fluid rounded-circle z-depth-2">
-          <h3>Mauricio</h3>
-          <a class="btn btn-secondary">VISITAR</a>
-        </div>
-      </div>
-
-      <div class="col">
-        <div style="text-align: center">
-          <img src="http://mdbootstrap.com/img/Photos/Avatars/img%20(2).jpg" class="img-fluid rounded-circle z-depth-2">
-          <h3>Keila</h3>
+          <img [src]="'data:image/jpg;base64,' + forn.imagem" class="img-fluid rounded-circle z-depth-2" style="height:250px;width:300px">
+          <h3>{{ forn.nome }}</h3>
           <a class="btn btn-secondary">VISITAR</a>
         </div>
       </div>
