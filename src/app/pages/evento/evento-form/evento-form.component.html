@@ -9,15 +9,24 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p class="h2 indigo-text" style="text-align: center;">Criar lista de presentes</p>
 
-    <input type="text" id="nome" class="form-control" formControlName="nome">
-    <label for="nome"><strong>Nome</strong> </label>
-
-    <input type="categoria" id="categoria" class="form-control" formControlName="categoria">
-    <label for="categoria"><strong>Categoria</strong> </label><br>
-
-    <input type="file" id="avatar" (change)="onFileChange($event)">
-    <label for="avatar"><strong>Loja</strong> </label>
-    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+    <div class="row">
+      <div class="col-md">
+        <div class="row">
+          <input type="text" id="nome" class="form-control" formControlName="nome">
+          <label for="nome"><strong>Nome</strong> </label>
+        </div>
+        <div class="row">
+          <input type="text" id="categoria" class="form-control" formControlName="categoria">
+          <label for="categoria"><strong>Categoria</strong> </label><br>
+        </div>
+      </div>
+      <div class="col-md text-center">
+        <br>
+        <label for="avatar" class="btn btn-indigo waves-light">Imagem da lista de presentes</label>
+        <input type="file" id="avatar" (change)="onFileChange($event)" style="visibility:hidden;">
+        <img *ngIf="form.controls['avatar'].value" [src]="'data:image/jpg;base64,' + form.controls['avatar'].value" style="height:300px;width:300px" class="img-fluid rounded-circle z-depth-2"/>
+      </div>
+    </div>
 
     <div class="text-center">
       <button class="btn btn-indigo waves-light" type="submit"><strong>Confirmar </strong> </button>

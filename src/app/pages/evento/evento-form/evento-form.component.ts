@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -9,15 +9,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class EventoFormComponent {
 
   form: FormGroup;
+  fb: FormBuilder;
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private injector: Injector) {
     this.createForm();
   }
 
   createForm() {
+    this.fb = this.injector.get(FormBuilder);
     this.form = this.fb.group({
-      name: [null, Validators.required],
+      nome: [null, Validators.required],
       categoria: [null, Validators.required],
       avatar: null
     });
@@ -29,11 +31,7 @@ export class EventoFormComponent {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.form.get('avatar').setValue({
-          filename: file.name,
-          filetype: file.type,
-          value: reader.result.split(',')[1]
-        });
+        this.form.controls['avatar'].setValue(reader.result.split(',')[1]);
       };
     }
   }
@@ -46,10 +44,5 @@ export class EventoFormComponent {
       console.log(formModel);
       alert('done!');
     }, 1000);
-  }
-
-  clearFile() {
-    this.form.get('avatar').setValue(null);
-    this.fileInput.nativeElement.value = '';
   }
 }
