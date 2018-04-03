@@ -2,6 +2,7 @@ import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FornecedorService} from '../../../service/fornecedor.service';
 import {ToastrService} from 'ngx-toastr';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'app-fornecedor-form',
@@ -12,11 +13,13 @@ export class FornecedorFormComponent {
 
   form: FormGroup;
   fb: FormBuilder;
+  public router: Router;
   @ViewChild('fileInput') fileInput: ElementRef;
   private service: FornecedorService;
 
   constructor(private injector: Injector, private toastr: ToastrService) {
     this.service = this.injector.get(FornecedorService);
+    this.router = this.injector.get(Router);
     this.createForm();
   }
 
@@ -45,7 +48,12 @@ export class FornecedorFormComponent {
     if (this.form.valid) {
       this.service.save(this.form.value).subscribe(() => {
         this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
+        this.navigate(['/pages/fornecedor']);
       });
     }
+  }
+
+  navigate(commands: any[], extras: NavigationExtras = {}): Promise<boolean> {
+    return this.router.navigate(commands, extras);
   }
 }

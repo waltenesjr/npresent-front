@@ -1,3 +1,73 @@
-<p>
-  produto-form works!
-</p>
+<div class="text-right">
+  <button mat-button class="text-danger" [routerLink]="['/']"><strong>VOLTAR</strong></button>
+</div>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p class="h1 text-danger text-center"><strong>Produto</strong></p>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="col-md">
+        <div class="row">
+          <div class="col-md">
+            <mat-form-field>
+              <input matInput placeholder="Nome" formControlName="nome" maxlength="150" required>
+              <mat-error *ngIf="form.controls['nome'].hasError('required')">
+                Campo <strong>obrigatório!</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <div class="col-md">
+            <mat-form-field>
+              <mat-select formControlName="categoria" matInput placeholder="Categoria" required>
+                <mat-option *ngFor="let cat of categorias | enumToArray" [value]="cat">
+                  {{ cat }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.controls['categoria'].hasError('required')">
+                Campo <strong>obrigatório!</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md">
+            <mat-form-field>
+              <input MoneyMask matInput placeholder="Valor" formControlName="valor" required>
+              <mat-error *ngIf="form.controls['valor'].hasError('required')">
+                Campo <strong>obrigatório!</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <div class="col-md">
+            <mat-form-field>
+              <input matInput placeholder="Link" formControlName="link" maxlength="150" required>
+              <mat-error *ngIf="form.controls['link'].hasError('required')">
+                Campo <strong>obrigatório!</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="text-center">
+      <button class="btn btn-lg btn-success" type="submit"><i class="fa fa-check"></i> <strong>CONFIRMAR</strong> </button>
+    </div>
+  </form>
+  <div class="divider"></div>
+  <div class="row">
+    <div *ngFor="let prod of produtos" class="col-md-4 text-center">
+      <div class="divider"></div>
+      <h4><strong>{{ prod.nome }}</strong></h4>
+      <h5><strong>{{ prod.categoria }}</strong></h5>
+      <h3><strong>{{ prod.valor | currency }}</strong></h3>
+      <button class="btn btn-lg btn-danger"><i class="fa fa-trash"></i></button>
+      <button class="btn btn-lg btn-warning" (click)="edit(prod.id)"><i class="fa fa-pencil"></i></button>
+    </div>
+  </div>
+  <br>
+</div>

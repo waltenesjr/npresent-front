@@ -1,14 +1,11 @@
-<nav class="navbar navbar-dark primary-color">
-  <a class="navbar-brand" href="#"><strong>NOSSO PRESENTE</strong></a>
-  <form class="form-inline">
-    <button class="btn btn-outline-white btn-sm my-1" [routerLink]="['/pages/evento']"><strong>VOLTAR</strong></button>
-  </form>
-</nav>
-<br>
+
+<div class="text-right">
+  <button mat-button class="text-danger" [routerLink]="['/pages/evento']"><strong>VOLTAR</strong></button>
+</div>
+
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p class="h2 indigo-text" style="text-align: center;">Criar lista de presentes</p>
-
+    <p class="h1 text-danger text-center" style="text-align: center;"><strong>Lista de presente</strong></p>
     <div class="row">
       <div class="col-md">
         <div class="row">
@@ -27,9 +24,8 @@
         <img *ngIf="form.controls['avatar'].value" [src]="'data:image/jpg;base64,' + form.controls['avatar'].value" style="height:300px;width:300px" class="img-fluid rounded-circle z-depth-2"/>
       </div>
     </div>
-
     <div class="text-center">
-      <button class="btn btn-indigo waves-light" type="submit"><strong>Confirmar </strong> </button>
+      <button class="btn btn-success btn-lg" type="submit"><i class="fa fa-check"></i> <strong>ADICIONAR</strong></button>
     </div>
   </form>
 </div>

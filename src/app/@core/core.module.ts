@@ -4,8 +4,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AnalyticsService} from './util/analytics.service';
 import {ExtraOptions} from '@angular/router/src/router_module';
 import {CommonModule} from '@angular/common';
-import {ToastrModule} from 'ngx-toastr';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {EnumToArrayPipe} from './pipe/enum-to-array.pipe';
+import {EnumToObjectPipe} from './pipe/enum-to-object.pipe';
+import {MoneyDirective} from './directive/money.directive';
 
 export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
 
@@ -18,7 +19,15 @@ export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
   exports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EnumToArrayPipe,
+    EnumToObjectPipe,
+    MoneyDirective
+  ],
+  declarations: [
+    EnumToArrayPipe,
+    EnumToObjectPipe,
+    MoneyDirective
   ]
 })
 export class CoreModule {
