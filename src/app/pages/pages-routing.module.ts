@@ -6,6 +6,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'evento', loadChildren: './evento/evento.module#EventoModule'},
+  {path: 'produto', loadChildren: './produto/produto.module#ProdutoModule'},
   {path: 'fornecedor', loadChildren: './fornecedor/fornecedor.module#FornecedorModule'}
 ];
 

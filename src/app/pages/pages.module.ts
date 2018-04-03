@@ -5,6 +5,7 @@ import {PagesRoutingModule} from './pages-routing.module';
 import {CoreModule} from "../@core/core.module";
 import {HomeComponent} from './home/home.component';
 import {ThemeModule} from "../@theme/theme.module";
+import { ProdutoComponent } from './produto/produto.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {ThemeModule} from "../@theme/theme.module";
     CoreModule.forChild()
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    ProdutoComponent
   ]
 })
 export class PagesModule {
