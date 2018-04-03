@@ -1,23 +1,19 @@
-<nav class="navbar navbar-dark primary-color">
-  <a class="navbar-brand" href="#">NOSSO PRESENTE</a>
-  <form class="form-inline">
-    <button class="btn btn-outline-white btn-sm my-0" [routerLink]="['/pages/fornecedor/form']">ADD FORNECEDOR</button>
-  </form>
-</nav>
+<div class="text-right">
+  <button mat-button class="text-danger" [routerLink]="['/pages/fornecedor/form']"><strong>ADD FORNECEDOR</strong></button>
+  <button mat-button class="text-danger" [routerLink]="['/']"><strong>VOLTAR</strong></button>
+</div>
 
 <div class="background-app">
   <div class="container">
-    <br>
     <div class="text-center">
-      <p class="h1 indigo-text">Fornecedores</p>
+      <p class="h1 text-danger"><strong>Fornecedores</strong></p>
     </div>
-    <br>
+    <div class="divider"></div>
     <div class="row">
       <div *ngFor="let forn of list" class="col-md-3">
-        <div style="text-align: center">
+        <div class="text-center" style="cursor: pointer;" [routerLink]="['/pages/fornecedor/form']">
           <img [src]="'data:image/jpg;base64,' + forn.imagem" class="rounded-circle" height="250" width="250">
-          <h3>{{ forn.nome }}</h3>
-          <a class="btn btn-secondary">VISITAR</a>
+          <h3><strong>{{ forn.nome }}</strong></h3>
         </div>
         <br>
       </div>

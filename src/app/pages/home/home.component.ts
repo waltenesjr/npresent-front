@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
+import {FornecedorModel} from "../../model/fornecedor.model";
+import {FornecedorService} from "../../service/fornecedor.service";
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
+  fornecedores: FornecedorModel[];
+  private service: FornecedorService;
+
+  constructor(private injector: Injector) {
+    this.service = this.injector.get(FornecedorService);
   }
 
   ngOnInit() {
+    this.service.getList().subscribe((res: FornecedorModel[]) => {
+      this.fornecedores = res;
+    });
   }
 
 }

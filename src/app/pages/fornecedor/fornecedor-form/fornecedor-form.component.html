@@ -1,14 +1,10 @@
-<nav class="navbar navbar-dark primary-color">
-  <a class="navbar-brand" href="#"><strong>NOSSO PRESENTE</strong></a>
-  <form class="form-inline">
-    <button class="btn btn-outline-white btn-sm my-1" [routerLink]="['/pages/fornecedor']"><strong>VOLTAR</strong></button>
-  </form>
-</nav>
-<br>
+<div class="text-right">
+  <button mat-button class="text-danger" [routerLink]="['/pages/fornecedor']"><strong>VOLTAR</strong></button>
+</div>
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p class="h2 indigo-text" style="text-align: center;">Criar fornecedor</p>
-
+    <p class="h1 text-danger" style="text-align: center;"><strong>Criar fornecedor</strong></p>
+    <div class="divider"></div>
     <div class="row">
       <div class="col-md">
         <div class="row">
@@ -44,17 +40,17 @@
           </div>
         </div>
       </div>
+      <div class="divider"></div>
       <div class="col-md text-center">
-        <br>
-        <label for="imagem" class="btn btn-indigo waves-light">Imagem do fornecedor </label>
-        <input type="file" id="imagem" (change)="onFileChange($event)" style="visibility:hidden;">
+        <label for="imagem" class="btn btn-lg btn-primary"><i class="fa fa-camera"></i> <strong>PROCURAR IMAGEM</strong></label>
+        <input type="file" id="imagem" (change)="onFileChange($event)" class="invisible">
         <img *ngIf="!form.controls['imagem'].value" height="250" width="250" class="rounded-circle border"/>
         <img *ngIf="form.controls['imagem'].value" [src]="'data:image/jpg;base64,' + form.controls['imagem'].value" height="250" width="250" class="rounded-circle"/>
       </div>
     </div>
-
+    <div class="divider"></div>
     <div class="text-center">
-      <button class="btn btn-indigo waves-light" type="submit"><strong>Confirmar </strong> </button>
+      <button class="btn btn-lg btn-success" type="submit"><i class="fa fa-check"></i> <strong>CONFIRMAR</strong> </button>
     </div>
   </form>
 </div>
