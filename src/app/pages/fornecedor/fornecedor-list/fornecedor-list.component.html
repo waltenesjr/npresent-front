@@ -8,14 +8,14 @@
 <div class="background-app">
   <div class="container">
     <br>
-    <div style="text-align: center;">
+    <div class="text-center">
       <p class="h1 indigo-text">Fornecedores</p>
     </div>
     <br>
     <div class="row">
       <div *ngFor="let forn of list" class="col-md-3">
         <div style="text-align: center">
-          <img [src]="'data:image/jpg;base64,' + forn.imagem" class="img-fluid rounded-circle z-depth-2" style="height:250px;width:300px">
+          <img [src]="'data:image/jpg;base64,' + forn.imagem" class="rounded-circle" height="250" width="250">
           <h3>{{ forn.nome }}</h3>
           <a class="btn btn-secondary">VISITAR</a>
         </div>

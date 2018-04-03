@@ -5,10 +5,14 @@ import {FornecedorListComponent} from './fornecedor-list/fornecedor-list.compone
 import {FornecedorFormComponent} from './fornecedor-form/fornecedor-form.component';
 import {CoreModule} from '../../@core/core.module';
 import {FornecedorService} from '../../service/fornecedor.service';
+import {ThemeModule} from "../../@theme/theme.module";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [
-    CoreModule.forRoot(),
+    CommonModule,
+    CoreModule.forChild(),
+    ThemeModule.forChild(),
     FornecedorRoutingModule
   ],
   declarations: [FornecedorListComponent, FornecedorFormComponent],

@@ -42,19 +42,10 @@ export class FornecedorFormComponent {
   }
 
   onSubmit() {
-    if (this.validate()) {
+    if (this.form.valid) {
       this.service.save(this.form.value).subscribe(() => {
         this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
       });
-    }
-  }
-
-  validate(): boolean {
-    if (!this.form.value.nome) {
-      this.toastr.error('Campo nome é obrigatório', 'Erro');
-      return false;
-    } else {
-      return true;
     }
   }
 }

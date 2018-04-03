@@ -1,5 +1,19 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 /* You can add global styles to this file, and also import other style files */
 body {
   //background-image: url("assets/img/background.png");
   background-repeat: no-repeat;
+}
+
+.mat-form-field.mat-form-field {
+  width: 100%;
+}
+
+.mat-cell {
+  padding-right: 15px;
+}
+
+.divider {
+  margin: 10px 0 20px 0;
 }
