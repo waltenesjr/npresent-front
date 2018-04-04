@@ -2,7 +2,7 @@
   <button mat-button class="text-danger" [routerLink]="['/']"><strong>VOLTAR</strong></button>
 </div>
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" novalidate autocomplete="off">
     <p class="h1 text-danger text-center"><strong>Produto</strong></p>
     <div class="divider"></div>
     <div class="row">
@@ -55,18 +55,18 @@
     </div>
     <div class="divider"></div>
     <div class="text-center">
-      <button class="btn btn-lg btn-success" type="submit"><i class="fa fa-check"></i> <strong>CONFIRMAR</strong> </button>
+      <button class="btn btn-lg btn-success" (click)="onSubmit()"><i class="fa fa-check"></i> <strong>PROXIMO</strong> </button>
     </div>
   </form>
   <div class="divider"></div>
   <div class="row">
     <div *ngFor="let prod of produtos" class="col-md-4 text-center">
       <div class="divider"></div>
-      <h4><strong>{{ prod.nome }}</strong></h4>
-      <h5><strong>{{ prod.categoria }}</strong></h5>
+      <h4 class="text-info"><strong>{{ prod.nome }}</strong></h4>
+      <h5 class="font-italic"><strong>{{ prod.categoria }}</strong></h5>
       <h3><strong>{{ prod.valor | currency }}</strong></h3>
-      <button class="btn btn-lg btn-danger"><i class="fa fa-trash"></i></button>
-      <button class="btn btn-lg btn-warning" (click)="edit(prod.id)"><i class="fa fa-pencil"></i></button>
+      <a class="btn btn-danger text-white" (click)="delete(prod.id)"><i class="fa fa-trash"></i></a>
+      <a class="btn btn-warning text-white" (click)="edit(prod.id)"><i class="fa fa-pencil"></i></a>
     </div>
   </div>
   <br>

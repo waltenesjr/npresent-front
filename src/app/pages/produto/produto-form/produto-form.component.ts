@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {CategoriaProdutoEnum} from '../../../enum/categoria-produto.enum';
@@ -10,7 +10,7 @@ import {ProdutoModel} from '../../../model/produto.model';
   templateUrl: './produto-form.component.html',
   styleUrls: ['./produto-form.component.scss']
 })
-export class ProdutoFormComponent {
+export class ProdutoFormComponent implements OnInit {
 
   categorias = CategoriaProdutoEnum;
   produtos: ProdutoModel[];
@@ -19,22 +19,26 @@ export class ProdutoFormComponent {
   private service: ProdutoService;
 
   constructor(private injector: Injector, private toastr: ToastrService) {
-    this.service = this.injector.get(ProdutoService);
-    this.createForm();
-    this.getList();
   }
 
-  createForm() {
+  ngOnInit(): void {
+    this.service = this.injector.get(ProdutoService);
+    this.getList();
+    this.createForm();
+  }
+
+  createForm(): void {
     this.fb = this.injector.get(FormBuilder);
     this.form = this.fb.group({
-      nome: [null, Validators.required],
-      link: [null, Validators.required],
-      categoria: [null, Validators.required],
-      valor: [null, Validators.required]
+      id: this.fb.control(null),
+      nome: this.fb.control(null, [Validators.required]),
+      link: this.fb.control(null, [Validators.required]),
+      categoria: this.fb.control(null, [Validators.required]),
+      valor: this.fb.control(null, [Validators.required])
     });
   }
 
-  getList() {
+  getList(): void {
     this.service.getList().subscribe((res: ProdutoModel[]) => {
       this.produtos = res;
     });
@@ -44,12 +48,6 @@ export class ProdutoFormComponent {
     if (this.form.valid) {
       this.service.save(this.form.value).subscribe(() => {
         this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
-        this.form.reset({
-          nome: '',
-          link: '',
-          categoria: '',
-          valor: ''
-        });
         this.getList();
       });
     }
@@ -57,5 +55,12 @@ export class ProdutoFormComponent {
 
   edit(id: number): void {
     this.form.reset(this.produtos.find(x => x.id === id));
+  }
+
+  delete(id: number): void {
+    this.service.remove(id).subscribe(() => {
+      this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
+      this.getList();
+    });
   }
 }

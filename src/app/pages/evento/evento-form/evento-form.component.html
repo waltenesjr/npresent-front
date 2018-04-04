@@ -1,31 +1,107 @@
-
 <div class="text-right">
   <button mat-button class="text-danger" [routerLink]="['/pages/evento']"><strong>VOLTAR</strong></button>
 </div>
 
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p class="h1 text-danger text-center" style="text-align: center;"><strong>Lista de presente</strong></p>
-    <div class="row">
-      <div class="col-md">
-        <div class="row">
-          <input type="text" id="nome" class="form-control" formControlName="nome">
-          <label for="nome"><strong>Nome</strong> </label>
-        </div>
-        <div class="row">
-          <input type="text" id="categoria" class="form-control" formControlName="categoria">
-          <label for="categoria"><strong>Categoria</strong> </label><br>
-        </div>
+
+    <div *ngIf="etapa === 0">
+      <h4 class="text-center"><strong>Passo 1 - Selecionar fornecedor</strong></h4>
+      <div class="divider"></div>
+      <div class="row">
+        <mat-form-field>
+          <input matInput placeholder="Buscar fornecedor" formControlName="fornecedor">
+        </mat-form-field>
       </div>
-      <div class="col-md text-center">
-        <br>
-        <label for="avatar" class="btn btn-indigo waves-light">Imagem da lista de presentes</label>
-        <input type="file" id="avatar" (change)="onFileChange($event)" style="visibility:hidden;">
-        <img *ngIf="form.controls['avatar'].value" [src]="'data:image/jpg;base64,' + form.controls['avatar'].value" style="height:300px;width:300px" class="img-fluid rounded-circle z-depth-2"/>
+      <div class="row">
+        <div *ngFor="let forn of fornecedores | search:'nome':form.controls['fornecedor'].value" class="col-md-2">
+          <div (click)="setFornecedor(forn)" class="text-center" style="cursor: pointer;">
+            <img [src]="'data:image/jpg;base64,' + forn.imagem" class="rounded-circle" height="150" width="150">
+            <h3><strong>{{ forn.nome }}</strong></h3>
+          </div>
+          <br>
+        </div>
       </div>
     </div>
-    <div class="text-center">
-      <button class="btn btn-success btn-lg" type="submit"><i class="fa fa-check"></i> <strong>ADICIONAR</strong></button>
+
+    <div *ngIf="etapa === 1">
+      <h4 class="text-center"><strong>Passo 2 - Preencher informações</strong></h4>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col-md">
+          <div class="row">
+            <mat-form-field>
+              <input matInput placeholder="Nome" formControlName="nome" maxlength="150" required>
+              <mat-error *ngIf="form.controls['nome'].hasError('required')">
+                Campo <strong>obrigatório!</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-select formControlName="tipo" matInput placeholder="Tipo" required>
+                <mat-option *ngFor="let t of tipos | enumToArray" [value]="t">
+                  {{ t }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.controls['tipo'].hasError('required')">
+                Campo <strong>obrigatório!</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <h5 class="text-center">Fornecedor</h5>
+          </div>
+          <div class="row text-center" *ngIf="fornecedor">
+            <img [src]="'data:image/jpg;base64,' + fornecedor.imagem" class="rounded-circle" height="100" width="100">
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="col-md text-center">
+          <label for="imagem" class="btn btn-lg btn-primary"><i class="fa fa-camera"></i> <strong>PROCURAR IMAGEM</strong></label>
+          <input type="file" id="imagem" (change)="onFileChange($event)" class="invisible">
+          <img *ngIf="!form.controls['imagem'].value" height="250" width="250" class="rounded-circle border"/>
+          <img *ngIf="form.controls['imagem'].value" [src]="'data:image/jpg;base64,' + form.controls['imagem'].value" height="250" width="250" class="rounded-circle"/>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="text-center">
+        <button class="btn btn-success btn-lg" (click)="getEtapaProduto()"><i class="fa fa-check"></i> <strong>PROSSEGUIR</strong></button>
+      </div>
+    </div>
+
+    <div *ngIf="etapa === 2">
+      <h4 class="text-center"><strong>Passo 3 - Selecionar produtos</strong></h4>
+      <div class="divider"></div>
+      <h4 *ngIf="produtosSelecionados.length > 0" class="text-center"><strong>Produtos selecionados</strong></h4>
+      <div class="divider"></div>
+      <div class="row">
+        <div *ngFor="let prod of produtosSelecionados; let i = index; trackBy: trackByFn" class="col-md-4 text-center">
+          <div class="divider"></div>
+          <h4 class="text-info"><strong>{{ prod.nome }}</strong></h4>
+          <h5 class="font-italic">{{ prod.categoria }}</h5>
+          <h3><strong>{{ prod.valor | currency }}</strong></h3>
+          <a title="Remover produto da lista" class="btn btn-danger text-white" (click)="removeProduto(prod, i)"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <h4 class="text-center"><strong>Selecionar produtos</strong></h4>
+      <div class="divider"></div>
+      <div class="row">
+        <div *ngFor="let prod of produtos; let i = index; trackBy: trackByFn" class="col-md-4 text-center">
+          <div class="divider"></div>
+          <h4 class="text-info"><strong>{{ prod.nome }}</strong></h4>
+          <h5 class="font-italic">{{ prod.categoria }}</h5>
+          <h3><strong>{{ prod.valor | currency }}</strong></h3>
+          <a title="Adicionar produto a lista" class="btn btn-success text-white" (click)="addProduto(prod, i)"><i class="fa fa-plus"></i></a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="text-center">
+        <button class="btn btn-success btn-lg" type="submit"><i class="fa fa-check"></i> <strong>ADICIONAR</strong></button>
+      </div>
     </div>
   </form>
 </div>
+<br>
+

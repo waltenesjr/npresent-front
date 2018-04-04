@@ -19,7 +19,7 @@ export class AbstractService<T> {
      */
     constructor(protected _http: HttpClient,
                 protected route: string) {
-        this.route = `${environment.URL_SERVER_API}` + '/' + route;
+        this.route = `${environment.URL_SERVER_API}` + '/' + route + '/';
     }
 
     /**
@@ -29,7 +29,7 @@ export class AbstractService<T> {
      * @return Observable<T[]>
      */
     getList(params: any = {}): Observable<T[] | any[]> {
-        return this._http.get(this.route + '/all', {
+        return this._http.get(this.route + 'all', {
             params: ((params == null || params == undefined) ? <any>{} : params)}).map(resp => resp as T[]);
     }
 
@@ -40,7 +40,7 @@ export class AbstractService<T> {
      * @return Observable<T>
      */
     get(id: number): Observable<T | any> {
-        return this._http.get(this.route + '/' + id).map(resp => resp as T);
+        return this._http.get(this.route + 'get/' + id).map(resp => resp as T);
     }
 
     /**
@@ -58,7 +58,7 @@ export class AbstractService<T> {
      * @return Observable<T> com referencia do objeto alterado
      */
     update(updatedResource: any): Observable<T | any> {
-        return this._http.put(this.route + '/', updatedResource).map(resp => resp as T);
+        return this._http.put(this.route + 'update', updatedResource).map(resp => resp as T);
     }
 
     /**
@@ -75,8 +75,8 @@ export class AbstractService<T> {
      * usado para inativar determinado recurso(exclusao logica) ou realizar o delete real do objeto;
      * @param {any} resource.
      */
-    remove(resource: any) {
-        return this._http.delete(this.route, resource.id).map(resp => resp);
+    remove(id: number) {
+        return this._http.delete(this.route + 'delete/' + id).map(resp => resp);
     }
 
     /**

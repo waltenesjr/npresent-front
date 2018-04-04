@@ -5,7 +5,7 @@ export class ProdutoModel {
     this.id = id;
     this.nome = nome;
     this.link = link;
-    this.valor = this.valor;
-    this.categoria = this.categoria;
+    this.valor = valor;
+    this.categoria = categoria;
   }
 }

@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {EnumToArrayPipe} from './pipe/enum-to-array.pipe';
 import {EnumToObjectPipe} from './pipe/enum-to-object.pipe';
 import {MoneyDirective} from './directive/money.directive';
+import {SearchPipe} from './pipe/search.pipe';
 
 export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
 
@@ -22,11 +23,13 @@ export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
     ReactiveFormsModule,
     EnumToArrayPipe,
     EnumToObjectPipe,
+    SearchPipe,
     MoneyDirective
   ],
   declarations: [
     EnumToArrayPipe,
     EnumToObjectPipe,
+    SearchPipe,
     MoneyDirective
   ]
 })

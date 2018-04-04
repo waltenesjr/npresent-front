@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
+import {EventoModel} from '../../../model/evento.model';
+import {EventoService} from '../../../service/evento.service';
 
 @Component({
   selector: 'app-evento-list',
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventoListComponent implements OnInit {
 
-  constructor() { }
+  list: EventoModel[] = new Array();
+  private service: EventoService;
+
+  constructor(private injector: Injector) {
+    this.list = new Array();
+    this.service = this.injector.get(EventoService);
+  }
 
   ngOnInit() {
-    console.log('funcionou');
+    this.service.getList().subscribe((res: EventoModel[]) => {
+      this.list = res;
+    });
   }
 
 }

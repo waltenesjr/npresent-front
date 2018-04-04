@@ -9,10 +9,11 @@ import {FornecedorModel} from '../../../model/fornecedor.model';
 })
 export class FornecedorListComponent implements OnInit {
 
-  list: FornecedorModel[];
+  list: FornecedorModel[] = new Array();
   private service: FornecedorService;
 
   constructor(private injector: Injector) {
+    this.list = new Array();
     this.service = this.injector.get(FornecedorService);
   }
 

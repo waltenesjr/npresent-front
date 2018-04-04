@@ -1,6 +1,7 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {FornecedorModel} from "../../model/fornecedor.model";
 import {FornecedorService} from "../../service/fornecedor.service";
+import {EventoModel} from '../../model/evento.model';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +11,17 @@ import {FornecedorService} from "../../service/fornecedor.service";
 export class HomeComponent implements OnInit {
 
   fornecedores: FornecedorModel[];
-  private service: FornecedorService;
+  eventos: EventoModel[];
+  private fornecedorService: FornecedorService;
 
   constructor(private injector: Injector) {
-    this.service = this.injector.get(FornecedorService);
+    this.fornecedores = new Array();
+    this.eventos = new Array();
+    this.fornecedorService = this.injector.get(FornecedorService);
   }
 
   ngOnInit() {
-    this.service.getList().subscribe((res: FornecedorModel[]) => {
+    this.fornecedorService.getList().subscribe((res: FornecedorModel[]) => {
       this.fornecedores = res;
     });
   }
