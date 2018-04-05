@@ -4,8 +4,10 @@ import {FornecedorModel} from '../../../model/fornecedor.model';
 import {FornecedorService} from '../../../service/fornecedor.service';
 import {TipoEventoEnum} from '../../../enum/tipo-evento.enum';
 import {ToastrService} from 'ngx-toastr';
-import {ProdutoService} from '../../../service/produto.service';
 import {ProdutoModel} from '../../../model/produto.model';
+import {EventoModel} from "../../../model/evento.model";
+import {EventoService} from "../../../service/evento.service";
+import {ProdutoService} from "../../../service/produto.service";
 
 @Component({
   selector: 'app-evento-form',
@@ -23,10 +25,12 @@ export class EventoFormComponent {
   form: FormGroup;
   fb: FormBuilder;
   @ViewChild('fileInput') fileInput: ElementRef;
+  private service: EventoService;
   private fornecedorService: FornecedorService;
   private produtoService: ProdutoService;
 
   constructor(private injector: Injector, private toastr: ToastrService) {
+    this.service = this.injector.get(EventoService);
     this.fornecedorService = this.injector.get(FornecedorService);
     this.produtoService = this.injector.get(ProdutoService);
     this.getFornecedores();
@@ -110,5 +114,21 @@ export class EventoFormComponent {
   }
 
   onSubmit() {
+    let model = this.convertForm();
+    this.service.save(model).subscribe(() => {
+      this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
+      this.etapa = 0;
+    });
+  }
+
+  convertForm(): EventoModel {
+    return new EventoModel(
+      0,
+      this.form.controls['nome'].value,
+      this.form.controls['tipo'].value,
+      this.fornecedor.id,
+      this.form.controls['imagem'].value,
+      this.produtosSelecionados
+    )
   }
 }

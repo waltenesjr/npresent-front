@@ -26,10 +26,10 @@ export class FornecedorFormComponent {
   createForm() {
     this.fb = this.injector.get(FormBuilder);
     this.form = this.fb.group({
-      nome: [null, Validators.required],
-      email: [null, Validators.required],
-      loja: [null, Validators.required],
-      imagem: null
+      nome: this.fb.control(null, [Validators.required]),
+      email: this.fb.control(null, [Validators.required, Validators.email]),
+      loja: this.fb.control(null, [Validators.required]),
+      imagem: this.fb.control(null)
     });
   }
 

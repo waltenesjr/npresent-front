@@ -11,7 +11,7 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatRadioModule,
-  MatSelectModule,
+  MatSelectModule, MatSidenavModule,
   MatSnackBarModule,
   MatTableModule,
   MatTooltipModule
@@ -35,7 +35,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatDialogModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSidenavModule
   ],
   exports: [
     CdkTableModule,
@@ -53,7 +54,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatSnackBarModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSidenavModule
   ]
 })
 export class MaterialDesignModule {
