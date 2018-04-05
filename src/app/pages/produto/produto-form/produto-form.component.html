@@ -1,9 +1,12 @@
 <div class="text-right">
-  <button mat-button class="text-danger" [routerLink]="['/']"><strong>VOLTAR</strong></button>
+  <div class="btn-group" role="group">
+    <button class="btn btn-light" [routerLink]="['/']"><strong>VOLTAR</strong></button>
+  </div>
 </div>
+
 <div class="container">
   <form [formGroup]="form" novalidate autocomplete="off">
-    <p class="h1 text-danger text-center"><strong>Produto</strong></p>
+    <p class="h1 text-secondary text-center"><strong>Produto</strong></p>
     <div class="divider"></div>
     <div class="row">
       <div class="col-md">

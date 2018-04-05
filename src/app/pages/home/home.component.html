@@ -1,12 +1,14 @@
 <div class="text-right">
-  <button mat-button class="text-danger" [routerLink]="['/pages/fornecedor']"><strong>FORNECEDOR</strong></button>
-  <button mat-button class="text-danger" [routerLink]="['/pages/evento']"><strong>LISTA</strong></button>
-  <button mat-button class="text-danger" [routerLink]="['/pages/produto/form']"><strong>PRODUTO</strong></button>
+  <div class="btn-group" role="group">
+    <button class="btn btn-light" [routerLink]="['/pages/fornecedor']"><strong>FORNECEDOR</strong></button>
+    <button class="btn btn-light" [routerLink]="['/pages/evento']"><strong>LISTA</strong></button>
+    <button class="btn btn-light" [routerLink]="['/pages/produto/form']"><strong>PRODUTO</strong></button>
+  </div>
 </div>
 
 <div class="container">
   <div *ngIf="eventos.length > 0" class="text-center">
-    <p class="h1 text-danger"><strong>Listas de presentes</strong></p>
+    <p class="h1 text-secondary"><strong>Listas de presentes</strong></p>
   </div>
   <div class="divider"></div>
   <div class="row">
@@ -20,14 +22,14 @@
   </div>
   <div class="divider"></div>
   <div *ngIf="fornecedores.length > 0" class="text-center">
-    <p class="h1 text-danger"><strong>Fornecedores</strong></p>
+    <p class="h1 text-secondary"><strong>Fornecedores</strong></p>
   </div>
   <div class="divider"></div>
   <div class="row">
     <div *ngFor="let forn of fornecedores" class="col-md-3">
       <div class="text-center">
         <img [src]="'data:image/jpg;base64,' + forn.imagem" class="rounded-circle" height="250" width="250">
-        <h3><strong>{{ forn.nome }}</strong></h3>
+        <h3 class="text-info"><strong>{{ forn.nome }}</strong></h3>
       </div>
     </div>
   </div>
