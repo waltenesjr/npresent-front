@@ -8,6 +8,7 @@ import {ThemeModule} from "../../@theme/theme.module";
 import {EventoService} from '../../service/evento.service';
 import {FornecedorService} from '../../service/fornecedor.service';
 import {ProdutoService} from '../../service/produto.service';
+import { EventoDetailComponent } from './evento-detail/evento-detail.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {ProdutoService} from '../../service/produto.service';
     CoreModule.forChild(),
     EventoRoutingModule
   ],
-  declarations: [EventoListComponent, EventoFormComponent],
+  declarations: [EventoListComponent, EventoFormComponent, EventoDetailComponent],
   providers: [EventoService, FornecedorService, ProdutoService]
 })
 export class EventoModule {

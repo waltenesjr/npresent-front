@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div *ngFor="let eve of list" class="col-md-3">
-        <div class="text-center">
+        <div style="cursor: pointer;" class="text-center" [routerLink]="['/pages/evento/detail', eve.fornecedor, eve.nome]">
           <img [src]="'data:image/jpg;base64,' + eve.imagem" class="rounded-circle" height="250" width="250">
           <h3><strong>{{ eve.nome }}</strong></h3>
           <h5><strong>{{ eve.tipo }}</strong></h5>
