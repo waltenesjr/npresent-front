@@ -11,6 +11,7 @@ import {NavigationExtras, Router} from '@angular/router';
 })
 export class FornecedorFormComponent {
 
+  public loading = false;
   form: FormGroup;
   fb: FormBuilder;
   public router: Router;
@@ -29,7 +30,7 @@ export class FornecedorFormComponent {
       nome: this.fb.control(null, [Validators.required]),
       email: this.fb.control(null, [Validators.required, Validators.email]),
       loja: this.fb.control(null, [Validators.required]),
-      imagem: this.fb.control(null)
+      imagem: this.fb.control(null, [Validators.required])
     });
   }
 
@@ -46,10 +47,16 @@ export class FornecedorFormComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.loading = true;
       this.service.save(this.form.value).subscribe(() => {
         this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
         this.navigate(['/pages/fornecedor']);
+        this.loading = false;
       });
+    } else {
+      if (!this.form.controls['imagem'].value) {
+        this.toastr.error('Por favor adicione uma imagem ', 'Erro');
+      }
     }
   }
 

@@ -4,7 +4,7 @@ import {ProdutoListComponent} from "./produto-list/produto-list.component";
 import {ProdutoFormComponent} from "./produto-form/produto-form.component";
 
 const routes: Routes = [
-  {path: '', component: ProdutoListComponent},
+  {path: '', component: ProdutoFormComponent},
   {path: 'list', component: ProdutoListComponent},
   {path: 'form', component: ProdutoFormComponent}
 ];

@@ -7,27 +7,25 @@ import {NgModule} from "@angular/core";
 import {FileUploadModule} from "ng2-file-upload";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        /*Libs*/
-        MaterialDesignModule.forRoot(),
-        MatTooltipModule,
-        FileUploadModule
-    ],
-    exports: [
-        /*libs*/
-        MatTooltipModule,
-        MaterialDesignModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MaterialDesignModule.forRoot(),
+    MatTooltipModule,
+    FileUploadModule
+  ],
+  exports: [
+    MatTooltipModule,
+    MaterialDesignModule
+  ]
 })
 export class ThemeModule {
 
-    static forChild(): ThemeModule {
-        return ThemeModule;
-    }
+  static forChild(): ThemeModule {
+    return ThemeModule;
+  }
 
-    constructor() {
-    }
+  constructor() {
+  }
 }

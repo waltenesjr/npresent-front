@@ -1,7 +1,7 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {FornecedorModel} from "../../model/fornecedor.model";
-import {FornecedorService} from "../../service/fornecedor.service";
 import {EventoModel} from '../../model/evento.model';
+import {EventoService} from '../../service/evento.service';
+import {TipoEventoEnum} from '../../enum/tipo-evento.enum';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +10,21 @@ import {EventoModel} from '../../model/evento.model';
 })
 export class HomeComponent implements OnInit {
 
-  fornecedores: FornecedorModel[];
+  public loading = false;
+  tipos = TipoEventoEnum;
   eventos: EventoModel[];
-  private fornecedorService: FornecedorService;
+  private eventoService: EventoService;
 
   constructor(private injector: Injector) {
-    this.fornecedores = new Array();
+    this.loading = true;
     this.eventos = new Array();
-    this.fornecedorService = this.injector.get(FornecedorService);
+    this.eventoService = this.injector.get(EventoService);
   }
 
   ngOnInit() {
-    this.fornecedorService.getList().subscribe((res: FornecedorModel[]) => {
-      this.fornecedores = res;
+    this.eventoService.getList().subscribe((res: EventoModel[]) => {
+      this.eventos = res;
+      this.loading = false;
     });
   }
 

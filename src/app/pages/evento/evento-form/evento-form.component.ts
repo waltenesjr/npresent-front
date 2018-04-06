@@ -16,6 +16,7 @@ import {ProdutoService} from "../../../service/produto.service";
 })
 export class EventoFormComponent {
 
+  public loading = false;
   fornecedores: FornecedorModel[] = new Array();
   produtos: ProdutoModel[] = new Array();
   produtosSelecionados: ProdutoModel[] = new Array();
@@ -30,6 +31,7 @@ export class EventoFormComponent {
   private produtoService: ProdutoService;
 
   constructor(private injector: Injector, private toastr: ToastrService) {
+    this.loading = true;
     this.service = this.injector.get(EventoService);
     this.fornecedorService = this.injector.get(FornecedorService);
     this.produtoService = this.injector.get(ProdutoService);
@@ -41,12 +43,15 @@ export class EventoFormComponent {
   getFornecedores(): void {
     this.fornecedorService.getList().subscribe((res: FornecedorModel[]) => {
       this.fornecedores = res;
+      this.loading = false;
     });
   }
 
   getProdutos(): void {
+    this.loading = true;
     this.produtoService.getList().subscribe((res: ProdutoModel[]) => {
       this.produtos = res;
+      this.loading = false;
     });
   }
 
@@ -56,7 +61,7 @@ export class EventoFormComponent {
       fornecedor: this.fb.control(null),
       nome: this.fb.control(null, [Validators.required]),
       tipo: this.fb.control(null, [Validators.required]),
-      imagem: this.fb.control(null)
+      imagem: this.fb.control(null, [Validators.required])
     });
   }
 
@@ -87,6 +92,9 @@ export class EventoFormComponent {
       this.etapa = 2;
     } else {
       this.validateAllFormFields(this.form);
+      if (!this.form.controls['imagem'].value) {
+        this.toastr.error('Por favor adicione uma imagem ', 'Erro');
+      }
     }
   }
 
@@ -114,11 +122,14 @@ export class EventoFormComponent {
   }
 
   onSubmit() {
-    let model = this.convertForm();
-    this.service.save(model).subscribe(() => {
-      this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
-      this.etapa = 0;
-    });
+    if (this.form.valid) {
+      this.loading = true;
+      this.service.save(this.convertForm()).subscribe(() => {
+        this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
+        this.etapa = 0;
+        this.loading = false;
+      });
+    }
   }
 
   convertForm(): EventoModel {

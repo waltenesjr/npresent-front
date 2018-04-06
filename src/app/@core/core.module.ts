@@ -8,6 +8,7 @@ import {EnumToArrayPipe} from './pipe/enum-to-array.pipe';
 import {EnumToObjectPipe} from './pipe/enum-to-object.pipe';
 import {MoneyDirective} from './directive/money.directive';
 import {SearchPipe} from './pipe/search.pipe';
+import {LoadingModule} from 'ngx-loading';
 
 export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
 
@@ -15,7 +16,8 @@ export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingModule
   ],
   exports: [
     CommonModule,
@@ -24,7 +26,8 @@ export const ROUTE_CONFIG: ExtraOptions = {enableTracing: false, useHash: true};
     EnumToArrayPipe,
     EnumToObjectPipe,
     SearchPipe,
-    MoneyDirective
+    MoneyDirective,
+    LoadingModule
   ],
   declarations: [
     EnumToArrayPipe,

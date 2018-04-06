@@ -1,6 +1,8 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
 <div class="text-right">
   <div class="btn-group" role="group">
-    <button class="btn btn-light" [routerLink]="['/pages/evento']"><strong>VOLTAR</strong></button>
+    <button class="btn btn-light" [routerLink]="['/']"><strong>VOLTAR</strong></button>
   </div>
 </div>
 
@@ -84,7 +86,7 @@
           <div class="divider"></div>
           <h4 class="text-info"><strong>{{ prod.nome }}</strong></h4>
           <h5 class="font-italic">{{ prod.categoria }}</h5>
-          <h3><strong>{{ prod.valor | currency }}</strong></h3>
+          <h3><strong>{{ prod.valor | currency:'R$ ' }}</strong></h3>
           <a title="Remover produto da lista" class="btn btn-danger text-white" (click)="removeProduto(prod, i)"><i class="fa fa-trash"></i></a>
         </div>
       </div>
@@ -96,7 +98,7 @@
           <div class="divider"></div>
           <h4 class="text-info"><strong>{{ prod.nome }}</strong></h4>
           <h5 class="font-italic">{{ prod.categoria }}</h5>
-          <h3><strong>{{ prod.valor | currency }}</strong></h3>
+          <h3><strong>{{ prod.valor | currency:'R$ ' }}</strong></h3>
           <a title="Adicionar produto a lista" class="btn btn-success text-white" (click)="addProduto(prod, i)"><i class="fa fa-plus"></i></a>
         </div>
       </div>
@@ -107,5 +109,5 @@
     </div>
   </form>
 </div>
-<br>
+<br><br>
 

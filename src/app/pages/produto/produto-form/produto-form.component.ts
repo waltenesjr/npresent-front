@@ -12,6 +12,7 @@ import {ProdutoModel} from '../../../model/produto.model';
 })
 export class ProdutoFormComponent implements OnInit {
 
+  public loading = false;
   categorias = CategoriaProdutoEnum;
   produtos: ProdutoModel[];
   form: FormGroup;
@@ -39,16 +40,20 @@ export class ProdutoFormComponent implements OnInit {
   }
 
   getList(): void {
+    this.loading = true;
     this.service.getList().subscribe((res: ProdutoModel[]) => {
       this.produtos = res;
+      this.loading = false;
     });
   }
 
   onSubmit(): void {
+    this.loading = true;
     if (this.form.valid) {
       this.service.save(this.form.value).subscribe(() => {
         this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
         this.getList();
+        this.loading = false;
       });
     }
   }
@@ -58,9 +63,11 @@ export class ProdutoFormComponent implements OnInit {
   }
 
   delete(id: number): void {
+    this.loading = true;
     this.service.remove(id).subscribe(() => {
       this.toastr.success('Operação realizada com sucesso ', 'Sucesso');
       this.getList();
+      this.loading = false;
     });
   }
 }

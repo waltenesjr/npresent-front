@@ -9,10 +9,12 @@ import {EventoService} from '../../../service/evento.service';
 })
 export class EventoListComponent implements OnInit {
 
+  public loading = false;
   list: EventoModel[] = new Array();
   private service: EventoService;
 
   constructor(private injector: Injector) {
+    this.loading = true;
     this.list = new Array();
     this.service = this.injector.get(EventoService);
   }
@@ -20,6 +22,7 @@ export class EventoListComponent implements OnInit {
   ngOnInit() {
     this.service.getList().subscribe((res: EventoModel[]) => {
       this.list = res;
+      this.loading = false;
     });
   }
 

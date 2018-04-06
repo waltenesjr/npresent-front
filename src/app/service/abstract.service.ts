@@ -67,7 +67,7 @@ export class AbstractService<T> {
      * @return Observable<T> com referencia do objeto persistido
      */
     create(newResource: any): Observable<T | any> {
-        return this._http.post(this.route + '/add', newResource).map(resp => resp as T);
+        return this._http.post(this.route + 'add', newResource).map(resp => resp as T);
     }
 
     /**

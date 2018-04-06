@@ -1,8 +1,8 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
 <div class="text-right">
   <div class="btn-group" role="group">
-    <button class="btn btn-light" [routerLink]="['/pages/fornecedor']"><strong>FORNECEDOR</strong></button>
-    <button class="btn btn-light" [routerLink]="['/pages/evento']"><strong>LISTA</strong></button>
-    <button class="btn btn-light" [routerLink]="['/pages/produto/form']"><strong>PRODUTO</strong></button>
+    <button class="btn btn-light" [routerLink]="['/pages/evento/form']"><strong>ADD LISTA</strong></button>
   </div>
 </div>
 
@@ -10,26 +10,29 @@
   <div *ngIf="eventos.length > 0" class="text-center">
     <p class="h1 text-secondary"><strong>Listas de presentes</strong></p>
   </div>
-  <div class="divider"></div>
   <div class="row">
-    <div *ngFor="let eve of eventos" class="col-md-3">
-      <div class="text-center">
-        <img [src]="'data:image/jpg;base64,' + eve.imagem" class="rounded-circle" height="250" width="250">
-        <h3><strong>{{ eve.nome }}</strong></h3>
-        <h4><strong>{{ eve.categoria }}</strong></h4>
-      </div>
+    <div class="col-md">
+      <mat-form-field>
+        <input matInput placeholder="Pesquisar lista de presentes">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-select matInput placeholder="Tipo da lista">
+          <mat-option *ngFor="let tipo of tipos | enumToArray" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
   <div class="divider"></div>
-  <div *ngIf="fornecedores.length > 0" class="text-center">
-    <p class="h1 text-secondary"><strong>Fornecedores</strong></p>
-  </div>
-  <div class="divider"></div>
   <div class="row">
-    <div *ngFor="let forn of fornecedores" class="col-md-3">
-      <div class="text-center">
-        <img [src]="'data:image/jpg;base64,' + forn.imagem" class="rounded-circle" height="250" width="250">
-        <h3 class="text-info"><strong>{{ forn.nome }}</strong></h3>
+    <div *ngFor="let eve of eventos" class="col-md-3">
+      <div style="cursor: pointer;" class="text-center" [routerLink]="['/pages/evento/detail', eve.fornecedor, eve.nome]">
+        <img [src]="'data:image/jpg;base64,' + eve.imagem" class="rounded-circle" height="250" width="250">
+        <h3><strong>{{ eve.nome }}</strong></h3>
+        <h4><strong>{{ eve.categoria }}</strong></h4>
       </div>
     </div>
   </div>

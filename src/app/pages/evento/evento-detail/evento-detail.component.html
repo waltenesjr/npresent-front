@@ -1,16 +1,51 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
 <div class="text-right">
   <div class="btn-group" role="group">
-    <button class="btn btn-light" [routerLink]="['/pages/evento/form']"><strong>ADD LISTA</strong></button>
     <button class="btn btn-light" [routerLink]="['/']"><strong>VOLTAR</strong></button>
   </div>
 </div>
 
-<div class="text-left">
+<div class="row">
   <div class="col-md-3">
     <div class="text-center">
-      <img [src]="'data:image/jpg;base64,' + evento.imagem" class="rounded-circle" height="250" width="250">
-      <h3><strong>{{ evento.nome }}</strong></h3>
-      <h5><strong>{{ evento.tipo }}</strong></h5>
+      <img [src]="'data:image/jpg;base64,' + evento.imagem" class="rounded-circle" height="200" width="200">
+      <h3 class="text-secondary"><strong>{{ evento.nome }}</strong></h3>
+      <h5 class="font-italic"><strong>{{ evento.tipo }}</strong></h5>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md">
+
+        <mat-form-field>
+          <input matInput placeholder="Pesquisar produtos">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-select matInput placeholder="Categoria">
+            <mat-option *ngFor="let cat of categorias | enumToArray" [value]="cat">
+              {{ cat }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let prod of produtos" class="col-md-4 text-center">
+        <a target="_blank" [href]="prod.link + lojaFornecedor" style="cursor: pointer">
+          <div class="divider"></div>
+          <h4 class="text-info"><strong>{{ prod.nome }}</strong></h4>
+          <h5 class="font-italic" style="color: black;">{{ prod.categoria }}</h5>
+          <h3><strong>{{ prod.valor | currency:'R$ ' }}</strong></h3>
+        </a>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+
+
