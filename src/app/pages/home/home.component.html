@@ -10,22 +10,27 @@
   <div *ngIf="eventos.length > 0" class="text-center">
     <p class="h1 text-secondary"><strong>Listas de presentes</strong></p>
   </div>
-  <div class="row">
-    <div class="col-md">
-      <mat-form-field>
-        <input matInput placeholder="Pesquisar lista de presentes">
-      </mat-form-field>
+  <form>
+    <div class="row">
+      <div class="col-md">
+        <mat-form-field>
+          <input matInput placeholder="Pesquisar lista de presentes">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-select matInput placeholder="Tipo da lista">
+            <mat-option *ngFor="let tipo of tipos | enumToArray" [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-success btn-lg" type="reset"><strong>Limpar filtro</strong></button>
+      </div>
     </div>
-    <div class="col-md-3">
-      <mat-form-field>
-        <mat-select matInput placeholder="Tipo da lista">
-          <mat-option *ngFor="let tipo of tipos | enumToArray" [value]="tipo">
-            {{ tipo }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
+  </form>
   <div class="divider"></div>
   <div class="row">
     <div *ngFor="let eve of eventos" class="col-md-3">

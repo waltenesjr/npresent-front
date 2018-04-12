@@ -32,7 +32,6 @@ export class EventoDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
     this.getParamSubscribe(params => {
       this.nomeEvento = params['evento'];
       this.idFornecedor = params['fornecedor'];
@@ -42,6 +41,7 @@ export class EventoDetailComponent implements OnInit {
   }
 
   getEvento(): void {
+    this.loading = true;
     this.service.getByEventoFornecedor(this.nomeEvento, this.idFornecedor).subscribe((res: EventoModel) => {
       this.evento = res;
       this.produtos = res.produtos;
@@ -50,8 +50,10 @@ export class EventoDetailComponent implements OnInit {
   }
 
   getLinkLoja(): void {
+    this.loading = true;
     this.fornecedorService.getLinkLoja(this.idFornecedor).subscribe((res: ValueModel) => {
       this.lojaFornecedor = res.value;
+      this.loading = false;
     });
   }
 

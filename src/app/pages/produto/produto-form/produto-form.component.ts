@@ -55,6 +55,8 @@ export class ProdutoFormComponent implements OnInit {
         this.getList();
         this.loading = false;
       });
+    } else {
+      this.loading = false;
     }
   }
 

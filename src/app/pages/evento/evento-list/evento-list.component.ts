@@ -14,12 +14,11 @@ export class EventoListComponent implements OnInit {
   private service: EventoService;
 
   constructor(private injector: Injector) {
-    this.loading = true;
-    this.list = new Array();
     this.service = this.injector.get(EventoService);
   }
 
   ngOnInit() {
+    this.loading = true;
     this.service.getList().subscribe((res: EventoModel[]) => {
       this.list = res;
       this.loading = false;
