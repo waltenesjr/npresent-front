@@ -2,7 +2,7 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatDatepickerModule,
   MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
@@ -36,7 +36,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule
   ],
   exports: [
     CdkTableModule,
@@ -55,7 +56,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule
   ]
 })
 export class MaterialDesignModule {

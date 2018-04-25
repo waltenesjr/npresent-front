@@ -10,16 +10,16 @@
   <div *ngIf="eventos.length > 0" class="text-center">
     <p class="h1 text-secondary"><strong>Listas de presentes</strong></p>
   </div>
-  <form>
+  <form [formGroup]="form">
     <div class="row">
       <div class="col-md">
         <mat-form-field>
-          <input matInput placeholder="Pesquisar lista de presentes">
+          <input matInput placeholder="Pesquisar lista de presentes" formControlName="nome">
         </mat-form-field>
       </div>
       <div class="col-md-3">
         <mat-form-field>
-          <mat-select matInput placeholder="Tipo da lista">
+          <mat-select formControlName="tipo" matInput placeholder="Tipo da lista">
             <mat-option *ngFor="let tipo of tipos | enumToArray" [value]="tipo">
               {{ tipo }}
             </mat-option>
@@ -33,7 +33,7 @@
   </form>
   <div class="divider"></div>
   <div class="row">
-    <div *ngFor="let eve of eventos" class="col-md-3">
+    <div *ngFor="let eve of eventos | search:'nome':form.controls['nome'].value" class="col-md-3">
       <div style="cursor: pointer;" class="text-center" [routerLink]="['/pages/evento/detail', eve.fornecedor, eve.nome]">
         <img [src]="'data:image/jpg;base64,' + eve.imagem" class="rounded-circle" height="250" width="250">
         <h3><strong>{{ eve.nome }}</strong></h3>

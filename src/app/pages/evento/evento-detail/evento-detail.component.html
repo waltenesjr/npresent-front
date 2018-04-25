@@ -17,9 +17,22 @@
   <div class="col-md-8">
     <div class="row">
       <div class="col-md">
-
         <mat-form-field>
           <input matInput placeholder="Pesquisar produtos">
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="pickerInicio" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="pickerFim" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFim></mat-datepicker>
         </mat-form-field>
       </div>
       <div class="col-md-3">
